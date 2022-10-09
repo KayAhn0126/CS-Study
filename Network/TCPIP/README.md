@@ -40,7 +40,7 @@
 ## 🍎 TCP의 특징
 - 흐름제어
     - TCP의 Header내 'Window size'를 사용해 한번에 받고/보낼 수 있는 데이터의 양을 정한다. 
-    - Window size는 일정량의 데이터.
+    - [Window size](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/description-tcp-features)는 주고 받을 데이터의 양.
     - Window size는 3-way handshake때 수신자가 정한다. 자신의 상황에 따라 Window size 조절.
     - 지금까지 받은 데이터 양을 확인해 송신자에게 보내는데 이를 'Acknowledgment Number'라고 한다.
     - 수신자가 300번째 데이터를 받았으면 'Acknowledgment Number'에 1을 더해 301을 송신자에게 보낸다. => "300번까지 받았으니 301번부터 보내!" 라는 의미.
@@ -49,17 +49,9 @@
 - 혼잡 제어
     - 데이터를 주고받는 양쪽의 단말(Endpoint)도 중요하지만 데이터가 지나가는 네트워크망의 혼잡 또한 중요하다.
     - 송신자와 수신자가 데이터를 넉넉히 주고받을 준비가 되어있어도 네트워크가 혼잡하다면 제대로 데이터를 보낼 수 없다.
-    - 'Slow Start'를 이용해 송신자는 연결 초기에 데이터 송출량을 낮게 잡고 보내면서 수신자의 수신을 확인하여 데이터 송출량을 늘린다. 이 과정을 거치면서 가장 적합한 데이터 송출량을 찾아 혼잡한 환경을 제어한다.
-
-
-
-
-
-
-
-
+    - '[Slow Start](https://www.stackpath.com/edge-academy/what-is-tcp-slow-start/)'알고리즘을 이용해 송신자는 연결 초기에 데이터 송출량을 낮게 잡고 보내면서 수신자의 수신을 확인하여 데이터 송출량을 늘린다. 이 과정을 거치면서 가장 적합한 데이터 송출량을 찾아 혼잡한 환경을 제어한다.
 
 
 ## 🍎 Citation
-[TCP/IP 쉽게 이해하기](https://aws-hyoh.tistory.com/entry/TCPIP-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
-[TCP/IP 4계층 사진 출처](https://www.guru99.com/tcp-ip-model.html)
+- [TCP/IP 쉽게 이해하기](https://aws-hyoh.tistory.com/entry/TCPIP-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
+- [TCP/IP 4계층 사진 출처](https://www.guru99.com/tcp-ip-model.html)
