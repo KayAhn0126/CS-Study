@@ -181,16 +181,16 @@
     - 특권 명령은 OS만 수행 가능
 - 사용자 프로그램은 어떻게 I/O를 하는가?
     - 시스템 콜(system call)
-        - 현재 CPU의 소유권은 사용자 프로그램이 가지고 있기 때문에 Mode Bit은 1이다.  
+        - 현재 CPU의 소유권은 사용자 프로그램이 가지고 있기 때문에 Mode Bit은 1이다.
         - 사용자 프로그램은 운영체제에게 I/O 요청할 필요가 있다.
         - **이것을 커널 함수를 부르는 행위 -> 시스템 콜이라고 한다.**
         - **커널 함수를 부르는 것은 사용자 프로그램 내에서 main 함수가 이 함수 저 함수 부르는것과 결이 다르다.**
         - 그럼 사용자 프로그램이 어떻게 운영체제에게 CPU 소유권을 넘길까?
         - Mode Bit이 1일때는 OS에 접근할 수 없다.
         - 그래서 사용자 프로그램은 직접 Interrupt line을 세팅하는 Instruction을 실행한다.
-        - 즉, 사용자 프로그램이 I/O를 위한 Interrupt를 CPU에게 Interrupt line을 통해서 보내는것.
-        - CPU는 하나의 Instrcution을 실행하고 Interrupt Line을 확인한다고 했다.
-        - Interrupt Line에 I/O Interrupt가 들어온것을 확인하면 Mode Bit이 0으로 바뀌고, CPU의 소유권이 운영체제에게 넘어간다.
+            - 즉, 사용자 프로그램이 I/O를 위한 Trap(System call)을 CPU에게 Interrupt line을 통해서 보내는것.
+        - CPU는 하나의 Instrcution을 실행하고 Interrupt Line을 확인 한다고 했다.
+        - Interrupt Line에 사용자 프로그램이 I/O 처리 부탁을 목적으로 보낸 Trap(System call)을 CPU가 확인하면 Mode Bit이 0으로 바뀌고, CPU의 소유권이 운영체제에게 넘어간다.
     - trap을 사용하여 인터럽트 벡터의 특정 위치로 이동
     - 제어권이 인터럽트 벡터가 가리키는 인터럽트 서비스 루틴으로 이동
     - 올바른 I/O 요청인지 확인 후 I/O 수행
@@ -203,7 +203,12 @@
         - timer + I/O
     - 소프트웨어 인터럽트 -> Trap
         - Exception : 프로그램이 오류를 범한 경우
+            - 0으로 나누려는 경우
+            - 운영체제의 메모리에 접근하려는 경우
+            - **Interrupt Line을 세팅해서 CPU의 소유권을 운영체제로 넘긴다!**
         - System Call : 프로그램이 커널 함수를 호출하는 경우
+        - **timer가 세팅한 시간이 다 되어서 운영체제로 넘어가는것은 System Call이 아니다!**
+        - **I/O 관련해서 사용자 프로그램이 운영체제에게 부탁을 할때 사용자 프로그램이 Interrupt Line을 통해 보내는 것이 System Call!**
 - 인터럽트 관련 용어
     - 인터럽트 벡터
         - 해당 인터럽트의 처리 루틴 주소를 가지고 있음
