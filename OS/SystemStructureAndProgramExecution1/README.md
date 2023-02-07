@@ -200,11 +200,11 @@
     - 하드웨어 인터럽트 -> Interrupt
         - timer + I/O(결과 반환)
     - 소프트웨어 인터럽트 -> Trap
-        - I/O(요청)
-        - System Call : 프로그램이 커널 함수를 호출하는 경우
-        - **timer가 세팅한 시간이 다 되어서 운영체제로 넘어가는것은 System Call이 아니다!**
-        - **사용자 프로그램이 운영체제에게 I/O를 부탁을 할때 사용자 프로그램이 Interrupt Line을 통해 보내는 것이 System Call!**
-        - Exception : 프로그램이 오류를 범한 경우
+        - **System Call과 Exception 두 가지가 있다. (둘 다 Trap이라고 부른다!)**
+        - **System Call : 프로그램이 I/O(요청)을 이유로 커널 함수를 호출하는 경우**
+        - timer가 세팅한 시간이 다 되어서 운영체제로 넘어가는것은 System Call이 아니다!
+        - 사용자 프로그램이 운영체제에게 I/O를 부탁을 할때 사용자 프로그램이 Interrupt Line을 통해 보내는 것이 System Call!
+        - **Exception : 프로그램이 오류를 범한 경우**
             - 0으로 나누려는 경우
             - 운영체제의 메모리에 접근하려는 경우
             - **Interrupt Line을 세팅해서 CPU의 소유권을 운영체제로 넘긴다!**
