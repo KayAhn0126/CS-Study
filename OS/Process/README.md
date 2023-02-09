@@ -1,0 +1,137 @@
+# Process 1
+
+## 🍎 프로세스의 개념
+- 프로세스란 무엇인가?
+    - 프로그램을 실행 중 특정 시점을 기준으로 딱 잘라놓고 보았을 때, 해당 시점에서 프로그램이 어떠한 상태에 있는지를 보여주는것
+- 실행 파일을 실행 시키면 가상 메모리 공간에 독자적인 프로세스의 주소 공간(Code, Data, Stack)이 생긴다.
+- 해당 프로세스가 CPU의 소유권을 가지게 되면, CPU의 Program counter가 Code 영역의 특정 부분을 가르키게 된다.
+- 매 순간, CPU는 PC가 가리키고 있는 곳의 Instrcution을 읽어서 CPU의 Register에 저장한다.
+- Register에 저장된 값들을 산술 논리 연산 장치(ALU)를 통해서 연산을 한다.
+- ALU를 통해서 연산된 값은 Register에 저장되거나 프로세스의 주소 공간에 저장한다.
+- 프로세스의 현재 상태를 나타내는데 필요한 모든 요소를 **프로세스의 문맥**이라고 한다.
+    - CPU와 관련된 하드웨어 상태
+        - Program Counter가 어디를 가리키고 있는지.
+        - 각종 register의 상태
+    - 프로세스의 주소 공간의 상태
+        - Code, Data, Stack
+    - 프로세스 관련 커널 자료 구조
+        - PCB(Process Control Block)
+        - Kernel stack
+- **프로세스 문맥은 왜 필요할까?**
+    - 시분할처리 방식 때문이다.
+    - 짧은 시간동안 여러 프로세스를 왔다갔다 해야하므로 이전 프로세스의 상태를 기억해둘 필요가 있는것이다.
+
+## 🍎 Process Control Block(PCB)
+- 운영체제의 역할 중 하나는 현재 컴퓨터에서 돌아가고 있는 프로세스들을 관리하는 것이다.
+- 프로세스가 하나 생길 때 마다 운영체제는 해당 프로세스를 관리하기 위해서 커널 주소 공간 내 data 영역에 PCB라는 자료구조로 관리하고 있다.
+- 간단하게 설명하면, 운영체제는 프로세스를 PCB 자료구조로 관리하면서 프로세스에게
+    - CPU를 얼마나 줘야하는지
+    - 메모리를 얼마나 줘야하는지,
+    - 나쁜짓을 하는지 안하는지 관리한다.
+- PCB의 내부를 살펴보면 아래와 같다. (구조체로 유지)
+    - OS가 관리상 사용하는 정보
+        - Process state, Process ID
+        - scheduling information, priority
+    - CPU 수행 관련 하드웨어 값
+        - Program Counter, register
+    - 메모리 관련
+        - 프로세스의 Code, Data, Stack들이 메모리의 어디에 위치한지 알려주는 정보
+    - 파일 관련
+        - Open file descriptiors
+
+## 🍎 프로세스의 상태(Process State)
+- 현재 수업에서는 CPU는 하나만 있다고 가정한다.
+- 프로세스는 상태(State)가 변경되며 수행된다.
+- Running
+    - **CPU를 잡고 instruction을 수행중인 상태**
+- Ready
+    - **CPU만 얻게되면 바로 실행 시킬수 있는 상태**, CPU를 기다리는 상태(메모리에 올라와있는 상태)
+    - 보통은 Ready상태에있는 프로세스들이 CPU를 잡았다 놨다 하면서 time sharing(시분할처리) 구현
+- Blocked(wait, sleep)
+    - **CPU를 주어도 당장 instruction을 수행 할 수 없는 상태**
+    - I/O 등의 event를 (스스로) 기다리는 상태
+        - Process 자신이 요청한 event(예: I/O)가 즉시 만족되지 않아 이를 기다리는 상태
+- Suspended(stopped)
+    - 외부적인 이유로 프로세스의 수행이 정지된 상태
+        - 1. 너무 많은 프로그램을 실행시켜 메모리에 너무 많은 프로세스가 올라와 있어, 현재 사용하지 않는 프로세스를 아예 디스크에 Swap out한 상태.
+        - 2. 예) 사람이 프로그램을 일시 정지 시킨 경우 control + C로 프로그램을 정지시킨 경우.
+- Blocked: 자신이 요청한 event가 만족되면 Ready!
+- Suspended: 외부에서 resum 해주어야 다시 Active!
+- 많이 쓰이진 않는 상태들(알아두기)
+    - New: **프로세스가 막 생성중인 상태**
+    - Terminated: **수행이 막 끝나서 정리중인 상태**, 완전히 끝난상태는 더 이상 프로세스가 아니다!
+- **운영체제는 커널 주소 공간의 data 영역에서 프로세스를 PCB 형태로 관리한다!**
+
+## 🍎 프로세스 상태도
+![](https://i.imgur.com/XwCR3NK.png)
+- 프로세스가 처음 생성되면, new에서 ready 상태가 된다. (CPU만 얻으면 바로 실행가능한 상태)
+- ready에 있는 프로세스가 CPU를 얻게되면 running 상태가 된다.
+- ready 상태에서 프로세스는 3가지 상태 변화를 맞을수 있는데,
+    - I/O trap 발생시, 프로세스는 "나는 지금 CPU를 가지고 있어봐야 할게없어"라며 block 상태로 넘어간다.
+    - timer interrupt 발생시 ready 상태로 넘어간다.
+    - 프로그램 종료
+
+## 🍎 컴퓨터 시스템 입장에서 보는 프로세스 상태
+![](https://i.imgur.com/6TlaeyJ.png)
+- CPU는 Ready queue에서 ready상태인 프로세스를 실행한다.
+- 하나의 프로세스가 CPU에서 Running이 되고 있다가 timer interrupt가 들어오면 해당 프로세스를 Ready Queue의 마지막으로 보낸다.
+- 만약 CPU가 프로세스를 실행중 I/O요청이 오면 해당 I/O의 queue로 보내고 해당 프로세스는 block 상태가 된다.
+- 이후 Device Controller에서 I/O가 끝났다고 Interrupt를 보내면 CPU는 현재 실행중이던 프로세스를 해당 PCB에 저장하고 인터럽트 벡터에서 종류 확인 후 처리 루틴을 실행한다.
+- CPU가 local buffer에서 정보를 가져와 프로세스의 주소 공간의 data 영역에 복사해준다.
+    - 이 부분은 앞에서 DMA Controller가 CPU의 역할을 분담한다고 하면서 배운 내용이다.
+    - DMA Controller는 CPU의 역할 분담을 위해 I/O Interrupt를 가로채 대신 local buffer의 값을 읽어들이고 해당 프로세스의 메모리 영역에 카피까지 해준 후 CPU에게 "나 다했어"라는 인터럽트를 날린다고 했다.
+- 또 운영체제는 위의 일을 수행하고 해당 프로세스를 block상태에서 ready상태로 전환 시켜준다.
+- **프로세스는 각 queue에 넣었다가 빼고 상태를 변화시키는 것은 커널 주소 공간의 Data영역에서 이뤄진다.**
+- 꼭 queue의 가장 맨앞이 먼저 실행되는것은 아니다! 우선순위를 따져서 dequeue한다!
+
+
+## 🍎 문맥 교환 (Context Switch)
+- CPU를 한 프로세스에서 다른 프로세스로 넘겨주는 과정
+- CPU가 다른 프로세스에게 넘어 갈때 운영체제가 하는 일은 아래와 같다.
+    - CPU의 소유권을 뺏기는 프로세스의 현재 상태를 해당 프로세스의 PCB에 저장
+    - CPU의 소유권을 가질 프로세스의 PCB에서 프로세스의 상태를 읽어옴
+- **System call이나 Interrupt 발생시 반드시 context switch가 일어나는것은 아니다!**
+- 만약 사용자 프로세스 A에서 timer interrupt 또는 I/O 요청 System call이 일어나서 사용자 프로세스 A가 block 상태가 되어 다른 사용자 프로세스로 CPU 소유권을 넘기는 것은 Context Switch이다.
+- 하지만 사용자 프로세스 A에서 interrupt 또는 System call이 발생하고 다시 사용자 프로세스 A로 CPU의 소유권을 넘기면 문맥 교환이 없다. 단지 실행모드만 사용자 모드에서 커널 모드로 바뀌었다가 다시 사용자 모드로 전환된것 뿐이다.
+    - Timer interrupt와 I/O 요청 System call을 제외한 interrupt 또는 System call.
+- 간단하게 이야기 하면 커널모드에 갔다가 다른 프로세스에게 CPU 소유권을 넘기면 문맥교환이 일어난 것!
+- **후자처럼 문맥교환이 일어나지 않더라도 항상 커널 모드로 진입할 때 PCB에 일부 정보를 save해야한다. 
+- 하지만 전자처럼 문맥을 교환하는 경우 그 부담(오버헤드)가 훨씬 크고, 이전 프로세스가 사용하던 cach memory도 지워줘야 한다.**
+
+## 🍎 프로세스를 스케쥴링하기 위한 큐
+- Job queue
+    - 현재 시스템 내에 있는 모든 프로세스의 집합
+- Ready queue
+    - 현재 메모리 내에 있으면서 CPU를 잡아서 실행되기를 기다리는 프로세스의 집합
+- Device queues
+    - I/O device의 처리를 기다리는 프로세스의 집합
+- 프로세스들은 각 큐들을 오가며 수행된다.
+
+## 🍎 Ready Queue와 다양한 Device Queue
+![](https://i.imgur.com/jxEhwpf.png)
+- 실제 시스템에서 큐가 어떻게 관리되는지 보여주는 이미지
+- 맨 위는 Ready Queue
+    - 프로세스들이 ready queue 안에서 줄 서있는 모습.
+- 4번째는 하드디스크 Device Queue
+    - 프로세스들이 device queue 안에 줄 서있는 모습.
+- 맨 위 Ready Queue를 보면 tail이 PCB와 연결되어있는것이 보인다. 이것은 tail이 PCB의 구조체에서 pointer 프로퍼티를 가리키도 있기 때문이다.
+
+## 🍎 스케쥴러(Scheduler)
+- Short-term scheduler(CPU scheduler)
+    - 어떤 프로세스를 다음번에 running 시킬지 결정
+    - 프로세스에 CPU를 주는 문제
+    - 충분히 빨라야 함(millisecond 단위)
+- Long-tern scheduler(Job scheduler)
+    - 메모리를 줄지 말지 결정하는 스케쥴러
+    - 시작 프로세스 중 어떤 것들을 ready queue로 보낼지 결정
+    - degree of Multiprogramming을 제어
+        - 메모리에 몇개의 프로세스를 올릴지 결정하는 스케쥴러
+    - 프로세스 상태도 카테고리 이미지에서 프로세스가 생성되는 new 상태에서 ready로 넘어갈 때, admitted가 되는데, 메모리 할당을 admit 하는것이다.
+    - 처음 프로세스가 시작될 때, 메모리를 얻지 못하면 아무것도 할 수 없다. 메모리에 올라가는것을 admit하게되면 CPU를 소유할 수 있는 상태인 Ready상태가 된다.
+    - **우리가 사용하는 시스템에는 장기 스케쥴러가 없다!**
+    - **장기 스케쥴러의 역할은 메모리를 줄지 말지 결정하는 것인데, 현재 컴퓨터에서 사용하는 시분할처리 방식은 프로그램 100개를 실행시키면 100개의 프로세스가 모두 ready 상태로 들어간다!**
+    - 그럼 컴퓨터는 degree of Multiprogramming을 어떻게 조절하는가?
+- Medium_term scheduler(Swapper)
+    - 여유 공간 마련을 위해 프로세스를 통째로 메모리에서 디스크로 쫒아냄
+    - **프로세스에게서 memory를 뺏는 문제**
+    - degree of Multiprogramming을 제어
