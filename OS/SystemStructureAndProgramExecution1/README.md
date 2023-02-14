@@ -5,10 +5,7 @@
 - 뒤로 갈수록 설명이 더욱 디테일 해진다.
 
 ## 🍎 컴퓨터의 구조
-- 컴퓨터의 구조는 크게 세가지로 나뉜다.
-    - CPU
-    - Memory
-    - I.O Devices(Disk도 I.O Device로 본다.)
+컴퓨터의 구조는 크게 세가지로 나뉜다.
 - CPU
     - 중앙처리장치
     - 오직 메인 메모리하고만 일을 한다.
@@ -16,7 +13,7 @@
 - Memory
     - 운영체제에서 메모리란 Main Memory(RAM)을 뜻한다.
     - CPU의 작업공간이다.
-- I.O Devices
+- I.O Devices(Disk도 I.O Device로 본다.)
     - Disk를 포함한 입출력장치.
     - Disk는 왜 입출력장치일까?
     - Disk는 필요에 따라 Memory에서 정보를 읽어들이는 Input Device의 역할도 하고, 또 처리결과를 하드디스크의 File System에 저장하면서 Output Device의 역할도 하기 때문에 I.O Device라고 할 수 있다.
@@ -26,7 +23,7 @@
         - 쉽게 말해 각각의 I.O Device에 대한 통제 권한은 Device Controller가 가지고 있다.
     - Main CPU에서 작업공간인 Main Memory가 있듯이, 각 Device에 붙어있는 작은 CPU인 Device Controller에도 작업공간이 필요한데 이것을 local buffer라고 부른다.(위의 이미지에서 초록색 네모)
 
-## 🍎 강의 중 교수님이 잠깐 이야기 하신것
+## 🍎 강의 중 교수님이 CPU에 대해서 잠깐 이야기 하신것
 - CPU와 I.O Device의 일 처리 속도는 약 100만배 차이가 난다. (하드디스크 기준)
 - **CPU의 운명은 Main Memory에 있는 Instruction을 매 클럭 사이클마다 읽어들이는게 전부!**
 - CPU 내, Main Memory보다 더 빠르면서 정보를 저장 할 수 있는 작은 공간이 있는데 이것을 Register라고 부른다.
@@ -82,9 +79,9 @@
 
 ## 🍎 운영체제(OS)가 CPU를 다시 소유하는 방법
 - 경우 1.
-    - Interrupt Line에 timer가 보낸 timer interrupt가 있다면 사용자 프로그램이 가지고 있던 CPU 소유권을 OS에 반납
-- 경우 2.
     - 사용자 프로그램이 수행해야 할 Instruction을 다 수행(즉, 프로그램 종료)하고 나면 자동으로 OS에게 CPU 소유권 반납.
+- 경우 2.
+    - Interrupt Line에 timer가 보낸 timer interrupt가 있다면 사용자 프로그램이 가지고 있던 CPU 소유권을 OS에 반납
 - 경우 3.
     - CPU가 사용자 프로그램에서 Instruction을 읽다가 입력을 받아야하거나, 처리 결과를 화면에 출력해야 하면, 즉, I.O 작업을 수행 해야하면 CPU 소유권을 가지고 있던 사용자 프로그램은 I.O처리를 운영체제에 맡기기 위해 자동으로 CPU 소유권을 운영체제에게 반납한다.
         - 즉, 사용자 프로그램은 직접적으로 I.O를 수행할 수 없다.
@@ -124,7 +121,7 @@
     - 제어 정보를 위해 Controller 내 control register, status register를 가진다.
         - CPU가 Controller에 일을 요청할 때 Controller내 control register에게 업무를 전달한다.
     - local buffer를 가진다.(일종의 data register)
-    - local buffer는 Controller의 작업 공간 및 저장 장소라고 생각하면 된다.
+    - local buffer는 Device Controller의 작업 공간 및 저장 장소라고 생각하면 된다.
 - **I/O는 실제 device와 local buffer 사이에서 일어난다.** 즉, Controller는 단순히 **제어만 한다**는 뜻!
 - Device Controller는 I/O가 끝났을 경우 interrput로 CPU에 그 사실을 알림
 
