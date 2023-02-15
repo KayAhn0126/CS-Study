@@ -124,7 +124,29 @@ int main()
 - **프로세스 간 협력 메커니즘**(IPC: Interprocess Communication)
     - 메세지를 전달하는 방법
         - message passing: 커널을 통해 메시지 전달
-        - 원칙적으로 프로세스끼리는 메시지를 전달할 수 없다. 중간에 커널이 메신저 역할을 해준다.
+        - 원칙적으로 프로세스끼리는 메시지를 전달할 수 없다. 중간에 **커널이 메신저 역할을 해준다.**
     - 주소 공간을 공유하는 방법
-        - shared memory: 서로 다른 프로세스 간에도 일부 주소 공간을 공유하게 하는 shared memory 메커니즘이 있음
-        - thread: thread는 사실상 하나의 프로세스이므로 프로세스 간 협력으로 보기는 어렵지만 동일한 process를 구성하는 thread들 간에는 주소 공간을 공유하므로 협력이 가능하다.
+        - shared memory: 서로 다른 프로세스 간에도 **일부 주소 공간을 공유**하게 하는 shared memory 메커니즘이 있음
+- 한번 읽어보기!
+    - thread는 사실상 하나의 프로세스이므로 프로세스 간 협력으로 보기는 어렵지만 동일한 process를 구성하는 thread들 간에는 주소 공간을 공유하므로 협력이 가능하다.
+
+## 🍎 Message Passing
+![](https://i.imgur.com/nrikMcT.png)
+- 두 가지 방법이 있다. **둘 다 커널을 이용해야한다.**
+- **통신하려는 프로세스의 이름을 명시하느냐 하지 않느냐로 나눌 수 있다.**
+- 이미지에서는 안그렇게 보이지만 프로세스간 통신은 무조건 커널을 통해서 통신해야한다.
+- Direct Communication
+    - 1:1
+    - Process P가 Send(Q, message)
+    - Send(**받는 프로세스 명시**, 메세지 내용)
+- Indirect Communication 이미지 해석
+    - Process P가 mailbox M에게 메세지를 전달한다. 이때 프로세스 P는 이 메세지가 누구한테 가는지는 모른채 mailbox M에게만 전달하는것.
+    - Process Q는 메세지를 받는데 누구한테서 온지는 모르고 mailbox M에서만 받는것으로 알고있음
+    - 1:1 또는 1:N도 가능!
+    - 메세지가 mailbox에 도착하면 mailbox를 구독하고 있는 프로세스들은 다 받을수 있다.(노티피케이션 형태)
+
+## 🍎 IPC의 두가지 방법
+![](https://i.imgur.com/3p1Mmoe.png)
+- **왼쪽은 Message Passing**으로, process A와 process B가 커널을 통해 협력을 하고있다.
+- **오른쪽은 Shared Memory**을 통한 협력 방식이다. process A와 process B는 각각의 주소 공간을 가지고 있는데 이를 물리적인 메모리에 맵핑할 때 일부 영역을 공유하도록 맵핑. **shared memory를 할때에도 프로세스끼리 하는것이 아니라 커널에게 부탁을 하면 매핑을 해주고, 커널이 연결을 한번 해주면 그때부터는 커널의 간섭없이 공유가 가능하다.**
+    - **두 프로세스를 share하려면 두 프로세스 모두 신뢰할 수 있는 그런 관계여야 한다.**
