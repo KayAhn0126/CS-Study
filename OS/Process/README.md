@@ -89,8 +89,8 @@
 ![](https://i.imgur.com/6TlaeyJ.png)
 - CPU는 Ready queue에서 ready상태인 프로세스를 실행한다.
 - 하나의 프로세스가 CPU에서 Running이 되고 있다가 timer interrupt가 들어오면 해당 프로세스를 Ready Queue의 마지막으로 보낸다.
-- 만약 CPU가 프로세스를 실행중 I/O요청이 오면 해당 I/O의 queue로 보내고 해당 프로세스는 block 상태가 된다.
-- 이후 Device Controller에서 I/O가 끝났다고 Interrupt를 보내면 CPU는 현재 실행중이던 프로세스를 해당 PCB에 저장하고 인터럽트 벡터에서 종류 확인 후 처리 루틴을 실행한다.
+- 만약 CPU가 프로세스를 실행 중 I/O요청이 오면 해당 I/O의 queue로 보내고 해당 프로세스는 block 상태가 된다.
+- 이후 Device Controller에서 I/O가 끝났다고 Interrupt를 보내면 CPU는 현재 실행 중이던 프로세스를 해당 PCB에 저장하고 인터럽트 벡터에서 종류 확인 후 처리 루틴을 실행한다.
 - CPU가 local buffer에서 정보를 가져와 프로세스의 주소 공간의 data 영역에 복사해준다.
     - 이 부분은 앞에서 DMA Controller가 CPU의 역할을 분담한다고 하면서 배운 내용이다.
     - DMA Controller는 CPU의 역할 분담을 위해 I/O Interrupt를 가로채 대신 local buffer의 값을 읽어들이고 해당 프로세스의 메모리 영역에 카피까지 해준 후 CPU에게 "나 다했어"라는 인터럽트를 날린다고 했다.
@@ -110,7 +110,7 @@
     - Timer interrupt와 I/O 요청 System call을 제외한 interrupt 또는 System call.
 - 간단하게 이야기 하면 커널모드에 갔다가 다른 프로세스에게 CPU 소유권을 넘기면 문맥교환이 일어난 것!
 - **후자처럼 문맥교환이 일어나지 않더라도 항상 커널 모드로 진입할 때 PCB에 일부 정보를 save해야한다.**
-- **하지만 전자처럼 문맥을 교환하는 경우 그 부담(오버헤드)가 훨씬 크고, 이전 프로세스가 사용하던 cach memory도 지워줘야 한다.**
+- **하지만 전자처럼 문맥을 교환하는 경우 그 부담(오버헤드)가 훨씬 크고, 이전 프로세스가 사용하던 cache memory도 지워줘야 한다.**
 
 ## 🍎 프로세스를 스케쥴링하기 위한 큐
 - Job queue
@@ -155,7 +155,7 @@
         - 메모리를 줄지 말지 결정은 Job scheduler에 정의된 로직대로 한다.
     - Medium-term 스케쥴러는 요청한 모든 프로세스 생성.
         - 메모리가 부족해 여유 공간을 마련해야 할때는 Swapper에 정의된 로직에 따라 프로세스를 통째로 메모리에서 디스크로 쫒아냄
-        - 아직 배우진 않았지만 가장 사용되지 않은 프로세스를 내리지 않을까 생각한다.
+        - 아직 배우진 않았지만 가장 오래 사용되지 않은 프로세스를 메모리에서 내리지 않을까 생각한다.
 
 # Process 2, 3
 ## 🍎 Thread
