@@ -7,7 +7,7 @@
 | [컴퓨터 시스템 구조 1](https://github.com/KayAhn0126/CS-Study/tree/main/OS/SystemStructureAndProgramExecution1) | CPU, Memory, I/O Devices의 상호작용 정리 |
 | [컴퓨터 시스템 구조 2](https://github.com/KayAhn0126/CS-Study/tree/main/OS/SystemStructureAndProgramExecution2) | PC의 역할, 비/동기식 입출력, DMA Controller 역할 정리 |
 | [프로세스 및 스레드](https://github.com/KayAhn0126/CS-Study/tree/main/OS/Process) | 프로세스, PCB, 프로세스 문맥 교환, 스케쥴링, 스레드 정리|
-| | |
+| [프로세스 관리 1,2](https://github.com/KayAhn0126/CS-Study/tree/main/OS/ProcessManagement) | 프로세스 생성, 종료, fork, exec, Messaging Passing, IPC 두가지 방법 |
 | | |
 
 ## 🍎 Network
