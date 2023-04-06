@@ -26,6 +26,7 @@
     - 짧은 시간동안 여러 프로세스를 왔다갔다 하면서 CPU로 프로세스의 Instruction을 읽어야 하므로 프로세스들의 상태를 기억하기 위해 사용.
 
 ## 🍎 Process Control Block(PCB)
+![](https://i.imgur.com/UrX2htp.png)
 - 운영체제의 역할 중 하나는 현재 컴퓨터에서 돌아가고 있는 프로세스들을 관리하는 것이다.
 - 프로세스가 하나 생길 때 마다 운영체제는 해당 프로세스를 관리하기 위해서 커널 주소 공간 내 data 영역에 PCB라는 자료구조로 관리하고 있다.
 - 간단하게 설명하면, 운영체제는 프로세스를 PCB 자료구조로 관리하면서 프로세스에게
@@ -33,14 +34,14 @@
     - 메모리를 얼마나 줘야하는지,
     - 나쁜짓을 하는지 안하는지 관리한다.
 - PCB의 내부를 살펴보면 아래와 같다. (구조체로 유지)
-    - OS가 관리상 사용하는 정보
+    - OS가 관리상 사용하는 정보 - 이미지에서 1번
         - Process state, Process ID
         - scheduling information, priority
-    - CPU 수행 관련 하드웨어 값
+    - CPU 수행 관련 정보 - 이미지에서 2번
         - Program Counter, register
-    - 메모리 관련
+    - 메모리 관련 - 이미지에서 3번
         - 프로세스의 Code, Data, Stack들이 메모리의 어디에 위치한지 알려주는 정보
-    - 파일 관련
+    - 파일 관련 - 이미지에서 4번
         - Open file descriptiors
 
 ## 🍎 프로세스 문맥과 PCB의 개념 차이
@@ -62,9 +63,13 @@
     - **CPU를 주어도 당장 instruction을 수행 할 수 없는 상태**
     - I/O 등의 event를 (스스로) 기다리는 상태
         - Process 자신이 요청한 event(예: I/O)가 즉시 만족되지 않아 이를 기다리는 상태
-- Suspended(stopped)
+- Suspended(stopped) - 중기 스케쥴러 때문에 추가된 프로세스 상태
+    - 현대 시스템에서는 Short-term, Medium-term 스케쥴러가 있다.
+    - Short-term 스케쥴러는 어떤 프로세스에게 CPU를 줄지 결정한다.
+    - Medium-term 스케쥴러는 어떤 프로세스의 메모리를 빼앗을지 결정한다.
+    - **즉, Suspended 상태는 여유 공간 마련을 위해 프로세스를 통째로 메모리에서 디스크로 쫒아내어 메모리에 올라와 있지 않은 상태이다.**
     - 외부적인 이유로 프로세스의 수행이 정지된 상태
-        - 1. 너무 많은 프로그램을 실행시켜 메모리에 너무 많은 프로세스가 올라와 있어, 현재 사용하지 않는 프로세스를 아예 디스크에 Swap out한 상태.
+        - **1. 너무 많은 프로그램을 실행시켜 메모리에 너무 많은 프로세스가 올라와 있어, 현재 사용하지 않는 프로세스를 아예 디스크에 Swap out한 상태.**
         - 2. 예) 사람이 프로그램을 일시 정지 시킨 경우 control + C로 프로그램을 정지시킨 경우.
 - **Blocked와 Suspended의 가장 큰 차이점**
     - Blocked: 자신이 요청한 event가 만족되면 Ready!
@@ -100,10 +105,12 @@
 
 
 ## 🍎 문맥 교환 (Context Switch)
+![](https://i.imgur.com/Q5LmO0H.png)
 - CPU를 한 프로세스에서 다른 프로세스로 넘겨주는 과정
 - CPU가 다른 프로세스에게 넘어 갈때 운영체제가 하는 일은 아래와 같다.
-    - CPU의 소유권을 뺏기는 프로세스의 현재 상태를 해당 프로세스의 PCB에 저장
-    - CPU의 소유권을 가질 프로세스의 PCB에서 프로세스의 상태를 읽어옴
+    - CPU의 소유권을 뺏기는 프로세스의 현재 상태(Program Counter, 레지스터 정보, Memory Map등)를 커널의 데이터 영역에 있는 해당 프로세스의 PCB에 저장
+    - CPU의 소유권을 가질 프로세스의 PCB에서 프로세스의 상태(Program Counter, 레지스터 정보, Memory Map등)를 읽어옴
+    - **위의 이미지 참조!!!**
 - **System call이나 Interrupt 발생시 반드시 context switch가 일어나는것은 아니다!**
 - 만약 사용자 프로세스 A에서 timer interrupt 또는 I/O 요청 System call이 일어나서 사용자 프로세스 A가 block 상태가 되어 다른 사용자 프로세스로 CPU 소유권을 넘기는 것은 Context Switch이다.
 - 하지만 사용자 프로세스 A에서 interrupt 또는 System call이 발생하고 다시 사용자 프로세스 A로 CPU의 소유권을 넘기면 문맥 교환이 없다. 단지 실행모드만 사용자 모드에서 커널 모드로 바뀌었다가 다시 사용자 모드로 전환된것 뿐이다.
@@ -131,11 +138,11 @@
 - 맨 위 Ready Queue를 보면 tail이 PCB와 연결되어있는것이 보인다. 이것은 tail이 PCB의 구조체에서 pointer 프로퍼티를 통해 다음 PCB를 가리키도 있기 때문이다.
 
 ## 🍎 스케쥴러(Scheduler)
-- Short-term scheduler(CPU scheduler)
+- Short-term scheduler(CPU scheduler) - 현대 시스템에서 사용
     - 어떤 프로세스를 다음번에 running 시킬지 결정
     - 프로세스에 CPU를 주는 문제
     - 충분히 빨라야 함(millisecond 단위)
-- Long-term scheduler(Job scheduler)
+- Long-term scheduler(Job scheduler) - 현대 시스템에서 사용하지 않음
     - 현재 컴퓨터 시스템에서는 사용하지 않는 스케쥴러
     - 메모리를 줄지 말지 결정하는 스케쥴러
     - 시작 프로세스 중 어떤 것들을 ready queue로 보낼지 결정
@@ -146,7 +153,7 @@
     - **우리가 사용하는 시스템에는 장기 스케쥴러가 없다!**
     - **장기 스케쥴러의 역할은 메모리를 줄지 말지 결정하는 것인데, 우리가 현재 컴퓨터에서 사용하는 시분할처리 방식은 프로그램 100개를 실행시키면 100개의 프로세스가 모두 ready 상태로 들어간다!**
     - 그럼 컴퓨터는 degree of Multiprogramming을 어떻게 조절하는가?
-- Medium-term scheduler(Swapper)
+- Medium-term scheduler(Swapper) - 현대 시스템에서 사용
     - 여유 공간 마련을 위해 프로세스를 통째로 메모리에서 디스크로 쫒아냄
     - **프로세스에게서 memory를 뺏는 문제**
     - degree of Multiprogramming을 제어
@@ -159,15 +166,15 @@
 
 # Process 2, 3
 ## 🍎 Thread
-- 프로세스 내부 실행 단위
-- Thread가 독립적으로 가지고 있는것
+- 정의: 가장 작은 프로세스 내부 실행 단위
+- Thread가 독립적으로 가지고 있는것 - CPU 수행과 관련된 정보
     - Program counter
-    - register set
-    - stack space
+    - Register set
+    - Stack space
 - Thread가 동료 thread와 공유하는 부분
     - task라고 부른다
-    - code section
-    - data section
+    - Code section
+    - Data section
     - OS resources
 
 ## 🍎 Thread는 왜 필요할까?
@@ -178,6 +185,13 @@
 - 메모리 주소 공간 내 Stack 영역에 각 thread들의 stack영역을 만들고 thread를 구성하는 요소인 Program counter만 다르게 설정한다.
     - 이렇게 된다면 각각의 쓰레드는 코드영역에서 읽는 부분이 각기 다르지만 결국엔 하나의 프로세스를 같이 수행하는 중이다.
 - 위 이미지를는 주소 공간에서 code, data, stack 영역을 보여주고 code와 data 영역은 thread끼리 공유한다는 것을 알 수 있다.
+![](https://i.imgur.com/Nype8co.png)
+- 이미지에서 빨간 박스의 위치에 쓰레드들이 들어간다.
+    - 하나의 쓰레드를 구성하는 요소들이 program counter와 register이란것을 떠올려보자!
+- 빨간 박스 옆에 빨간 글씨로 "Thread", "light weight"라고 쓰여있고
+    - 즉 각각의 쓰레드가 처리하는것은 전체적인 그림으로 볼때 light한 것이고,
+- 그 오른쪽에 파란 글씨로 "Process", "Heavy weight"라고 쓰여있다.
+    - 전체적으로 봤을때 여러 쓰레드가 하는 일은 결국 프로세스가 하는일이므로 heavy하다고 할 수 있다.
 
 ## 🍎 실 생활에서 thread의 역할
 - 예를 들어, 웹 브라우저를 켜서 naver.com을 입력하면 다중 스레드로 구성된 task 구조에서는 하나의 서버 스레드가 blocked(waiting) 상태인 동안에도 동일한 task 내 다른 스레드가 실행(running)되어 빠른 처리를 할 수 있다.
@@ -190,7 +204,7 @@
     - 이것을 싱글 스레드와 멀티 스레드로 예시를 들어보자.
         - 스레드가 하나인 Heavyweight Process의 경우 : 포털 사이트에 접속하면 처음에 HTML 문서를 읽어온 다음에, 이미지를 다시 웹 서버에 요청하는 과정이 있다. 그게 오래 걸리는 작업이기 때문에, 해당 프로세스를 블록시킨다. 그럼 화면은 멈춰있는 상태이고, 전체를 다 정상적으로 받아 올때까지는 화면에 아무것도 보여주지 않는다.
         - 스레드가 여러개인 Lightweight Process의 경우 : 여러개의 스레드를 사용해서 웹브라우저를 만들면 이미지를 가져오는 스레드가 블록이 되어도, 텍스트를 먼저 가져와서 화면에 보여주고, 이미지는 나중에 다 받아오면 그때 화면에 보여준다.
-- 자원 공유
+- 자원 공유로 인한 자원 절약
     - 스레드만 여러개 놓고 Code, Data, 프로세스의 자원을 공유하므로 메모리를 아낄수 있다.
 - 효율성
     - 효율적인 예 1)
