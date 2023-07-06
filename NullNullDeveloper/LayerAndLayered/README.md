@@ -1,5 +1,5 @@
 # Layer와 Layered
-![](https://hackmd.io/_uploads/S198wB4Y3.png)
+![LayerAndLayered](https://github.com/KayAhn0126/CS-Study/assets/40224884/3f12e573-26df-40e2-b2b2-e7c1dd4066f8)
 
 ## 🍎 설명
 - 사각형 하나가 요소라고 가정했을때, 요소와 요소간의 관계를 그림으로 표현하는 것을 도식화라고 한다.
