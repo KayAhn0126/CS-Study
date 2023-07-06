@@ -1,5 +1,6 @@
 # Layer와 Layered
-![](https://hackmd.io/_uploads/H1H5YB-Yn.jpg)
+![](https://hackmd.io/_uploads/Sk4mHBVYn.jpg)
+
 
 ## 🍎 설명
 - 사각형 하나가 요소라고 가정했을때, 요소와 요소간의 관계를 그림으로 표현하는 것을 도식화라고 한다.
