@@ -1,5 +1,5 @@
 # Layer와 Layered
-<img src='./LayerAndLayered.png' width=500>
+<img src='./LayerAndLayered.jpg' width=500>
 
 ## 🍎 설명
 - 사각형 하나가 요소라고 가정했을때, 요소와 요소간의 관계를 그림으로 표현하는 것을 도식화라고 한다.
