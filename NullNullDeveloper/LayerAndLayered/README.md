@@ -12,5 +12,3 @@
     - 고등
     - 중등
     - 초등
-
-<img width="620" alt="Black" src="https://github.com/KayAhn0126/CS-Study/assets/40224884/6bc1d8b8-9ca1-4775-a0b0-5c4ee08db7b4">
