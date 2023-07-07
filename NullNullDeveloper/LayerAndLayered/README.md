@@ -1,5 +1,5 @@
 # Layer와 Layered
-![LayerAndLayered](https://github.com/KayAhn0126/CS-Study/assets/40224884/3f12e573-26df-40e2-b2b2-e7c1dd4066f8)
+<img src='./LayerAndLayered.png' width=500>
 
 ## 🍎 설명
 - 사각형 하나가 요소라고 가정했을때, 요소와 요소간의 관계를 그림으로 표현하는 것을 도식화라고 한다.
@@ -12,3 +12,5 @@
     - 고등
     - 중등
     - 초등
+
+<img width="620" alt="Black" src="https://github.com/KayAhn0126/CS-Study/assets/40224884/6bc1d8b8-9ca1-4775-a0b0-5c4ee08db7b4">
