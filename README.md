@@ -19,10 +19,10 @@
 ### 📖 Network
 | 이름 | 설명 |
 |:----:|:----:|
-| [OSI 7 계층](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/OSI) | OSI 7 계층 정리 |
-| [TCP / IP](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/TCPIP)| TCP/IP 및 3-way handshake 정리|
-| [TCP / UDP 비교](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/TCPUDP)| TCP/UDP 비교 정리|
-| [3-way Handshake 분석](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/ThreeWayHandshake)| 3/4-way handshake 분석 및 정리|
+| [OSI 7 계층](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/OSI) | OSI 7 계층 정리 |
+| [TCP / IP](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/TCPIP)| TCP/IP 및 3-way handshake 정리|
+| [TCP / UDP 비교](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/TCPUDP)| TCP/UDP 비교 정리|
+| [3-way Handshake 분석](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/ThreeWayHandshake)| 3/4-way handshake 분석 및 정리|
 | | |
 
 
@@ -30,3 +30,6 @@
 ### 📖 Network 
 | 이름 | 설명 |
 |:----:|:----:|
+| [Layer와 Layered](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/LayerAndLayered) | 요소와 Layer의 관계 |
+| [Usermode 와 KernelMode](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/UsermodeAndKernelMode) | OSI 7 Layer를 공부하기전 각 계층 살펴보기 |
+| [OSI 7 Layer와 식별자](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/OSI7LayerAndIdentifier) | OSI 7 Layer와 식별자 |
