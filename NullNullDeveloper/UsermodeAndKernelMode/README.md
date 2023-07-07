@@ -1,5 +1,5 @@
 # User mode와 Kernel mode
-<img src = './UsermodeAndKernelmode.jpeg' width = 800>
+<img src = './UsermodeAndKernelmode.jpg' width = 800>
 
 ## 🍎 그림에 대한 전반적 설명
 - 컴퓨터는 SW, HW로 나뉘고, SW는 다시 User mode application과 Kernel mode software로 나뉜다.
