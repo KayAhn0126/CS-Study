@@ -1,4 +1,4 @@
-# IntroductionToOS
+# Introduction To OS
 
 ## 🍎 운영체제 입문
 
