@@ -35,7 +35,37 @@
 - 세마포어
     - 임계 구역에 들어갈 수 있는 수를 정해놓는다 <- 세마포어는 실제로 정수형 변수다.
         - 공유자원이 2개라면 세마포어 값은 2
-        - int s = 1;
+        ```java
+        int s = 1;
+        
+        wait(s); // 세마포어(s)의 수를 하나 줄이고, 문을 잠근다. 
+        int currentHealth = GetHealth();
+        health = currentHealth + 50;
+        
+        signal(s); // 문을 열고 세모포어(s)의 수를 하나 늘린다.
+        ``` 
     - 프로세스가 wait(s);를 만나면 세마포어(s)의 수를 하나 줄이고 임계구역에 접근한다. (문을 잠근다)
     - 프로세스가 signal(s); 세마포어(s)의 수를 하나 올리고 임계 구역을 빠져나온다. (잠궜던 문을 해제한다)
     - wait() 함수와 signal() 함수의 순서를 이상하게 호출하면 의도치 않은 결과를 가져올 수 있다.
+- 모니터
+    - 세마포어의 단점을 해결한 상호배제 매커니즘
+    - 모니터는 운영체제가 따로 처리하는 것이 아니라 프로그래밍 언어차원에서 지원하는 방법 (JAVA, .NET, C#)
+        - 대표적으로 JAVA에서 모니터를 지원하는데 예시 코드를 보면서 이해해보자
+        ```java
+        public class Health {
+            private int health = 100;
+            
+            synchronized void increase(int amount) {
+                health += amount;
+            }
+            
+            synchronized void decrease(int amount) {
+                health -= amount;
+            }
+        }
+        ```
+        - 자바에서 synchronized 키워드가 붙으면, 이 키워드가 붙은 함수들은 동시에 여러 프로세스(자바에선 쓰레드)에서 실행 시킬 수 없다.
+        - 만약 프로세스 A에서 increase() 함수를 호출하면, 프로세스 B에서는 increase() 함수 뿐만 아니라 synchronized 키워드가 붙은 decrease() 함수 또한 사용 할 수 없다.
+        - 즉, synchronized가 적용된 메서드끼리 일괄적으로 lock을 공유해 어떤 인스턴스가 해당 메서드를 사용하고 있으면 다른 인스턴스는 아무 메서드도 사용 할 수 없도록 만들어 놓은것이다.
+        - 개발자는 세마포어처럼 wait() 함수나 signal() 함수를 임계 구역에 감싸지 않아도 돼서 편리하고 안전하게 코드를 작성할 수 있다.
+        - 하지만 synchronized 키워드를 너무 남발해서 사용하게 되면 필요하지 않은곳에서도 메서드에 lock이 걸려 성능이 저하될 수 있다.
