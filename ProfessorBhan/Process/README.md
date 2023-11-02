@@ -85,7 +85,7 @@
 ![](https://i.imgur.com/XwCR3NK.png)
 - 프로세스가 처음 생성되면, new에서 ready 상태가 된다. (CPU만 얻으면 바로 실행가능한 상태)
 - ready에 있는 프로세스가 CPU를 얻게되면 running 상태가 된다.
-- ready 상태에서 프로세스는 3가지 상태 변화를 맞을수 있는데,
+- running 상태에서 프로세스는 3가지 상태 변화를 맞을수 있는데,
     - I/O trap 발생시, 프로세스는 "나는 지금 CPU를 가지고 있어봐야 할게없어"라며 block 상태로 넘어간다.
     - timer interrupt 발생시 ready 상태로 넘어간다.
     - 프로그램 종료
