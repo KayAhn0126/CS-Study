@@ -8,7 +8,6 @@
 - **한마디로 웹 상에서 정보를 전송하기 위한 통신 프로토콜로써 HTML과 같은 문서를 전송하는 것에 사용.**
 - 클라이언트가 HTTP request를 서버에 보내면 서버는 HTTP response를 클라이언트에 보내는 방법으로 클라이언트와 서버가 통신한다.
 ### 📖 HTTP Request의 구조
-<img src = './HTTPRequest.jpg' width = 700>
 - HTTP request는 아래와 같이 이루어져있다.
     - start line
         - start line은 아래와 같이 이루어져 있다.
@@ -17,9 +16,10 @@
         - HTTP version
     - headers
     - body
+- 아래의 그림에서 보라색 부분이 HTTP request의 start line을 이루는 부분이다.
+<img src = './HTTPRequest.jpg' width = 700>
 
 ### 📖 HTTP Response의 구조
-<img src = './HTTPResponse.jpg' width = 700>
 - HTTP response는 아래와 같이 이루어져있다.
     - status line
         - status line은 아래와 같이 이루어져 있다.
@@ -28,6 +28,8 @@
         - status message
     - headers
     - body
+- 아래의 그림에서 보라색 부분이 HTTP response의 status line을 이루는 부분이다.
+<img src = './HTTPResponse.jpg' width = 700>
 
 ### 📖 Connectionless / Stateless
 - HTTP는 서버에 연결 후 요청에 응답을 받으면 연결을 끊어버리는 Connectionless 특성을 갖는다.
