@@ -6,9 +6,9 @@
 ## 🍎 HTTP을 더 자세히 알아보자
 ### 📖 그래서 HTTP가 정확히 무엇인가?
 - **한마디로 웹 상에서 정보를 전송하기 위한 통신 프로토콜로써 HTML과 같은 문서를 전송하는 것에 사용.**
-
-### 📖 클라이언트가 서버와 어떻게 통신할까?
-- 클라이언트가 HTTP request를 서버에 보내면 서버는 HTTP response를 클라이언트에 보내는 구조.
+- 클라이언트가 HTTP request를 서버에 보내면 서버는 HTTP response를 클라이언트에 보내는 방법으로 클라이언트와 서버가 통신한다.
+### 📖 HTTP Request의 구조
+<img src = './HTTPRequest.jpg' width = 700>
 - HTTP request는 아래와 같이 이루어져있다.
     - start line
         - start line은 아래와 같이 이루어져 있다.
@@ -17,6 +17,9 @@
         - HTTP version
     - headers
     - body
+
+### 📖 HTTP Response의 구조
+<img src = './HTTPResponse.jpg' width = 700>
 - HTTP response는 아래와 같이 이루어져있다.
     - status line
         - status line은 아래와 같이 이루어져 있다.
