@@ -2,6 +2,7 @@
 <img src = './Switch.jpg' width = 700>
 
 ## 🍎 Switch란?
+- 패킷이 경로를 선택하는 행동을 Switching이라 한다.
 - 위의 이미지에서..
     - 여러갈래의 길로 나뉘어져 있는것을 Network
     - 자동차를 Packet
