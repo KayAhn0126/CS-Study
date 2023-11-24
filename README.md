@@ -20,9 +20,9 @@
 | 이름 | 설명 |
 |:----:|:----:|
 | [OSI 7 계층](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/OSI) | OSI 7 계층 정리 |
-| [TCP / IP](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/TCPIP)| TCP/IP 및 3-way handshake 정리|
-| [TCP / UDP 비교](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/TCPUDP)| TCP/UDP 비교 정리|
-| [3-way Handshake 분석](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/ThreeWayHandshake)| 3/4-way handshake 분석 및 정리|
+| [TCP / IP](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/TCPIP)| TCP/IP 및 3-way handshake 정리 |
+| [TCP / UDP 비교](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/TCPUDP)| TCP/UDP 비교 정리 |
+| [3-way Handshake 분석](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/ThreeWayHandshake)| 3-way handshake 분석 및 정리 |
 | | |
 
 
@@ -33,3 +33,14 @@
 | [Layer와 Layered](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/LayerAndLayered) | 요소와 Layer의 관계 |
 | [Usermode 와 KernelMode](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/UsermodeAndKernelMode) | OSI 7 Layer를 공부하기전 각 계층 살펴보기 |
 | [OSI 7 Layer와 식별자](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/OSI7LayerAndIdentifier) | OSI 7 Layer와 식별자 |
+| [Host](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/Host) | Host |
+| [Switch](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/Switch) | Switch |
+| [NIC, L2 Frame, LAN 카드, MAC 주소](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/NICL2FrameLANMAC) | NIC, L2 Frame, LAN 카드, MAC 주소 |
+| [L2 Access Switch](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/L2AccessSwitch) | L2 Access Switch |
+| [LAN, WAN, Broadcast](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/LANWANBroadcast) | LAN, WAN, Broadcast |
+| [IPv4](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/IPv4) | IPv4 |
+| [L3 IP Packet](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/L3IPPacket) | L3 IP Packet |
+| [Encapsulation / Decapsulation](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/EnDeCapsulation) | Encapsulation / Decapsulation |
+| []() | |
+| []() | |
+
