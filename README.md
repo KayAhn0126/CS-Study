@@ -27,6 +27,8 @@
 | [HTTP GET / POST](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/HTTPGETPOST) | HTTP GET / POST Method |
 | [HTTP Status Code](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/HTTPStatusCode) | HTTP Status Code |
 | [www.google.com을 주소창에 쳤을 때 화면이 나오기까지의 과정](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/ProcessToFirstPage) | URL 입력부터 화면 렌더링까지의 간략한 과정 |
+| [쿠키와 세션의 차이점](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/CookieAndSession) | 쿠키와 세션의 차이점 |
+| [쿠키와 세션을 이용한 로그인 방식](https://github.com/KayAhn0126/CS-Study/tree/main/DeveloperMrNoh/Network/LoginProcessWithCookieAndSession) | 쿠키와 세션을 통한 인증과 인가 |
 
 
 ## 🍎 널널한 개발자
