@@ -46,6 +46,6 @@
 | [IPv4](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/IPv4) | IPv4 |
 | [L3 IP Packet](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/L3IPPacket) | L3 IP Packet |
 | [Encapsulation / Decapsulation](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/EnDeCapsulation) | Encapsulation / Decapsulation |
-| []() | |
-| []() | |
+| [패킷의 생성과 전달](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/CreationAndDeliveryOfPacket) | 패킷의 생성 및 전달 |
+| [계층별 데이터 단위](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/DataUnitByLayer) | 계층별 데이터 단위 |
 
