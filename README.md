@@ -48,4 +48,5 @@
 | [Encapsulation / Decapsulation](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/EnDeCapsulation) | Encapsulation / Decapsulation |
 | [패킷의 생성과 전달](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/CreationAndDeliveryOfPacket) | 패킷의 생성 및 전달 |
 | [계층별 데이터 단위](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/DataUnitByLayer) | 계층별 데이터 단위 |
+| [TCP / IP 송수신 구조](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/TCPIPStructure) | 두 프로세스간 TCP / IP 통신 설명 |
 
