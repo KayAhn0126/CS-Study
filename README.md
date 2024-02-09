@@ -51,7 +51,7 @@
 | [TCP / IP 송수신 구조](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/TCPIPStructure) | 두 프로세스간 TCP / IP 통신 설명 |
 | [IPv4 Header Structure](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/IPv4Structure) | IPv4 헤더 구조 |
 | [Broadcast IP / localhost 주소](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/LoopBackAddress) | Broadcast IP 주소와 localhost 주소 |
-| [TTL과 단편화](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/TTLAndFragmentation) | TTL과 단편화 |
+| [TTL과 단편화](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/TTLAndFragmentation) | TTL과 단편화  |
 | [DHCP](https://github.com/KayAhn0126/CS-Study/tree/main/NullNullDeveloper/DHCP) | DHCP의 개념과 작동방식 |
 
 
